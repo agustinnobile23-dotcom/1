@@ -2,718 +2,156 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fotos Navideñas - Google Drive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación Web | Agustín Nobile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RESET Y BASE */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        html, body {
-            height: 100%;
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background: linear-gradient(135deg, #0d1b2a 0%, #1b3a4b 100%);
-            color: white;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            color: #e2e8f0;
             min-height: 100vh;
-        }
-        
-        /* CONTENEDOR PRINCIPAL */
-        .container {
-            width: 100%;
-            max-width: 500px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            align-items: center;
         }
-        
-        /* HEADER */
-        .header {
+
+        header {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(90deg, #1e3c72, #2a5298);
-            border-radius: 20px;
-            border: 3px solid #4a90e2;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            margin: 40px 0;
+            max-width: 800px;
         }
-        
+
         h1 {
-            font-size: 26px;
-            color: #FFD700;
-            text-shadow: 2px 2px #C41E3A;
+            font-size: 3rem;
+            background: linear-gradient(to right, #d4af37, #f1f5f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 10px;
+            font-weight: 800;
         }
-        
-        .subtitle {
-            font-size: 16px;
-            color: #87CEEB;
-        }
-        
-        /* CÁMARA */
-        .camera-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            border: 2px solid rgba(52, 152, 219, 0.4);
-            text-align: center;
-        }
-        
-        .camera-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: #4FC3F7;
-        }
-        
-        /* VIDEO Y CÁMARA */
-        #video-container {
-            position: relative;
+
+        .subtitle { color: #94a3b8; font-size: 1.2rem; }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             width: 100%;
-            max-width: 400px;
-            height: 300px;
-            margin: 0 auto 20px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 3px solid #2c3e50;
-            background: #000;
-        }
-        
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .camera-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            font-size: 18px;
-            text-align: center;
+            max-width: 1100px;
             padding: 20px;
         }
-        
-        canvas {
-            display: none;
-        }
-        
-        /* BOTONES */
-        .buttons {
+
+        .logo-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 24px;
+            padding: 40px 25px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            width: 100%;
+            justify-content: space-between;
         }
-        
-        .btn {
-            padding: 18px;
-            border: none;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            transition: all 0.2s;
+
+        .logo-card:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        
-        .btn:active {
-            transform: scale(0.98);
+
+        .icon-box {
+            font-size: 3.5rem;
+            color: #d4af37;
+            margin-bottom: 20px;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #00C853, #64DD17);
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #FF9800, #F57C00);
-            color: white;
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #2196F3, #1976D2);
-            color: white;
-        }
-        
-        .btn:disabled {
-            background: #78909C;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        /* VISTA PREVIA */
-        .preview-section {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            border: 2px solid rgba(0, 200, 83, 0.4);
-            text-align: center;
-        }
-        
-        .preview-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: #00C853;
-        }
-        
-        #preview {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 15px;
-            border: 3px solid #00C853;
-            margin: 0 auto;
-        }
-        
-        /* MENSAJES */
-        .message {
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 16px;
-            text-align: center;
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .message-success {
-            background: rgba(46, 204, 113, 0.2);
-            border: 2px solid #2ecc71;
-            color: #2ecc71;
-        }
-        
-        .message-error {
-            background: rgba(231, 76, 60, 0.2);
-            border: 2px solid #e74c3c;
-            color: #e74c3c;
-        }
-        
-        .message-info {
-            background: rgba(52, 152, 219, 0.2);
-            border: 2px solid #3498db;
-            color: #3498db;
-        }
-        
-        /* DRIVE SECTION */
-        .drive-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            border: 2px solid rgba(66, 133, 244, 0.4);
-            text-align: center;
-        }
-        
-        .drive-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: #4FC3F7;
-        }
-        
-        .drive-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #4285F4, #3367D6);
-            color: white;
-            padding: 18px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 600;
-            width: 100%;
-            max-width: 350px;
-            margin: 10px 0;
-            transition: all 0.2s;
-        }
-        
-        .drive-link:active {
-            transform: scale(0.98);
-            background: linear-gradient(135deg, #3367D6, #2B5CB8);
-        }
-        
-        .direct-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: #00C853;
-            color: white;
+
+        .logo-name { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
+
+        .logo-desc { color: #cbd5e1; margin-bottom: 25px; line-height: 1.6; }
+
+        .btn-whatsapp {
+            background: #d4af37;
+            color: #0f172a;
             padding: 15px 25px;
-            border-radius: 10px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: all 0.2s;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+            font-size: 1rem;
         }
-        
-        .direct-link:active {
-            background: #00B248;
-            transform: translateY(-2px);
+
+        .btn-whatsapp:hover {
+            background: #fff;
+            transform: scale(1.05);
         }
-        
-        /* FOOTER */
-        .footer {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #B0BEC5;
-            font-size: 14px;
+
+        footer {
+            margin-top: 40px;
+            padding: 40px;
             text-align: center;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.1);
             width: 100%;
         }
-        
-        /* SPINNER */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* RESPONSIVE */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 500px;
-            }
-            
-            .buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            
-            .btn {
-                width: auto;
-                flex: 1;
-                min-width: 160px;
-            }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            .container { grid-template-columns: 1fr; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <header>
+        <h1>CREACIÓN WEB</h1>
+        <p class="subtitle">Agustín Nobile | Hernando, Córdoba</p>
+    </header>
+    
     <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <h1><i class="fas fa-tree"></i> FOTOS NAVIDEÑAS <i class="fas fa-candy-cane"></i></h1>
-            <p class="subtitle">Toma fotos y se guardan automáticamente en Google Drive</p>
-        </div>
-        
-        <!-- CÁMARA -->
-        <div class="camera-section">
-            <div class="camera-title">
-                <i class="fas fa-camera"></i>
-                <span>Cámara</span>
+        <div class="logo-card">
+            <div>
+                <div class="icon-box"><i class="fas fa-list-ul"></i></div>
+                <h2 class="logo-name">Catálogos Digitales</h2>
+                <p class="logo-desc">Perfecto para comercios. Tus productos organizados para que tus clientes te compren por WhatsApp sin vueltas.</p>
             </div>
-            
-            <div id="video-container">
-                <video id="video" autoplay playsinline></video>
-                <div class="camera-overlay" id="camera-overlay">
-                    <div>
-                        <i class="fas fa-camera" style="font-size: 40px; margin-bottom: 10px;"></i>
-                        <p>Haz clic en "ACTIVAR CÁMARA" para empezar</p>
-                    </div>
-                </div>
-            </div>
-            
-            <canvas id="canvas"></canvas>
-            
-            <div class="buttons">
-                <button id="activate-btn" class="btn btn-primary">
-                    <i class="fas fa-video"></i> ACTIVAR CÁMARA
-                </button>
-                <button id="capture-btn" class="btn btn-success" style="display: none;">
-                    <i class="fas fa-camera"></i> TOMAR FOTO
-                </button>
-                <button id="retake-btn" class="btn btn-secondary" style="display: none;">
-                    <i class="fas fa-redo"></i> OTRA FOTO
-                </button>
-                <button id="upload-btn" class="btn btn-success" style="display: none;">
-                    <i class="fas fa-cloud-upload-alt"></i> SUBIR A DRIVE
-                </button>
-            </div>
-        </div>
-        
-        <!-- VISTA PREVIA -->
-        <div class="preview-section" id="preview-section">
-            <div class="preview-title">
-                <i class="fas fa-image"></i>
-                <span>Vista previa</span>
-            </div>
-            <img id="preview" alt="Tu foto">
-        </div>
-        
-        <!-- MENSAJES -->
-        <div id="message" class="message"></div>
-        
-        <!-- DRIVE -->
-        <div class="drive-section">
-            <div class="drive-title">
-                <i class="fas fa-images"></i>
-                <span>Google Drive</span>
-            </div>
-            <p style="margin-bottom: 15px; color: #B0BEC5;">Todas las fotos se guardan aquí:</p>
-            
-            <a href="#" id="drive-link" class="drive-link" onclick="openDrive()">
-                <i class="fab fa-google-drive"></i> VER FOTOS EN DRIVE
+            <a href="https://wa.me/5493534014734?text=Hola%20Agustin,%20quiero%20consultar%20por%20un%20Catalogo%20Digital" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> CONTRATAR PLAN
             </a>
-            
-            <div id="direct-link-container" style="display: none; margin-top: 15px;">
-                <a href="#" id="direct-link" class="direct-link" target="_blank">
-                    <i class="fas fa-external-link-alt"></i> VER ÚLTIMA FOTO
-                </a>
-            </div>
         </div>
         
-        <!-- FOOTER -->
-        <div class="footer">
-            <p>Creado con <i class="fas fa-heart" style="color:#FF4081;"></i> para la Navidad</p>
-            <p style="margin-top: 5px;">© 2025-2026</p>
+        <div class="logo-card" style="border-color: #d4af37; background: rgba(212, 175, 55, 0.05);">
+            <div>
+                <div class="icon-box"><i class="fas fa-store"></i></div>
+                <h2 class="logo-name">Web de Negocio</h2>
+                <p class="logo-desc">Tu empresa abierta 24/7. Mostrá tus servicios y profesionalismo a todo el país desde Hernando.</p>
+            </div>
+            <a href="https://wa.me/5493534014734?text=Hola%20Agustin,%20quiero%20consultar%20por%20una%20Web%20de%20Negocio" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> CONTRATAR PLAN
+            </a>
+        </div>
+        
+        <div class="logo-card">
+            <div>
+                <div class="icon-box"><i class="fas fa-rocket"></i></div>
+                <h2 class="logo-name">Landing Page</h2>
+                <p class="logo-desc">Páginas de alto impacto diseñadas para vender un servicio específico de forma rápida y efectiva.</p>
+            </div>
+            <a href="https://wa.me/5493534014734?text=Hola%20Agustin,%20quiero%20consultar%20por%20una%20Landing%20Page" class="btn-whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> CONTRATAR PLAN
+            </a>
         </div>
     </div>
+    
+    <footer>
+        <p>&copy; 2026 Creación Web - Agustín Nobile</p>
+        <p>Hernando, Córdoba, Argentina</p>
+    </footer>
 
-    <script>
-        // ==================== CONFIGURACIÓN ====================
-        const DRIVE_FOLDER_URL = 'https://drive.google.com/drive/folders/11n-F08H93SbXd1zDn86R_vK-haJFPwQQ';
-        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbyCs-8Y8GmUl2Q1d9TeSbNSJ6j4gxYXbGUMbycAUxh09oM13D5WoeTB6GsIX9_Kdl1X/exec';
-        
-        // ==================== ELEMENTOS ====================
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const activateBtn = document.getElementById('activate-btn');
-        const captureBtn = document.getElementById('capture-btn');
-        const retakeBtn = document.getElementById('retake-btn');
-        const uploadBtn = document.getElementById('upload-btn');
-        const preview = document.getElementById('preview');
-        const previewSection = document.getElementById('preview-section');
-        const messageEl = document.getElementById('message');
-        const cameraOverlay = document.getElementById('camera-overlay');
-        const driveLink = document.getElementById('drive-link');
-        const directLinkContainer = document.getElementById('direct-link-container');
-        const directLink = document.getElementById('direct-link');
-        const videoContainer = document.getElementById('video-container');
-        
-        let photoData = null;
-        let stream = null;
-        let lastUploadedFileId = null;
-        
-        // ==================== FUNCIONES AUXILIARES ====================
-        
-        function showMessage(text, type = 'info', duration = 5000) {
-            messageEl.innerHTML = text;
-            messageEl.className = 'message';
-            messageEl.classList.add(`message-${type}`);
-            messageEl.style.display = 'block';
-            
-            if (duration > 0) {
-                setTimeout(() => {
-                    messageEl.style.display = 'none';
-                }, duration);
-            }
-        }
-        
-        function openDrive() {
-            // Abrir Drive en el navegador
-            window.open(DRIVE_FOLDER_URL, '_blank');
-            return false;
-        }
-        
-        // ==================== CÁMARA ====================
-        
-        async function activateCamera() {
-            try {
-                showMessage('⌛ Activando cámara...', 'info', 3000);
-                
-                // Detener stream anterior si existe
-                if (stream) {
-                    stream.getTracks().forEach(track => track.stop());
-                }
-                
-                // Opciones para móvil
-                const constraints = {
-                    video: {
-                        facingMode: 'user', // Cámara frontal
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    },
-                    audio: false
-                };
-                
-                // Solicitar permisos
-                stream = await navigator.mediaDevices.getUserMedia(constraints);
-                
-                // Configurar video
-                video.srcObject = stream;
-                
-                // Ocultar overlay
-                cameraOverlay.style.display = 'none';
-                
-                // Mostrar botón de captura
-                activateBtn.style.display = 'none';
-                captureBtn.style.display = 'flex';
-                
-                showMessage('✅ Cámara activada. ¡Sonríe!', 'info', 3000);
-                
-            } catch (error) {
-                console.error('Error cámara:', error);
-                
-                let errorMsg = 'No se pudo activar la cámara. ';
-                if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
-                    errorMsg = '⚠️ Permiso de cámara denegado. ';
-                    errorMsg += 'Por favor, permite el acceso a la cámara en la configuración de tu navegador.';
-                    
-                    // Mostrar instrucciones específicas
-                    cameraOverlay.innerHTML = `
-                        <div style="text-align: center; padding: 20px;">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 40px; color: #FF9800; margin-bottom: 15px;"></i>
-                            <h3 style="margin-bottom: 10px;">Permiso requerido</h3>
-                            <p style="margin-bottom: 15px;">Para usar la cámara necesitas:</p>
-                            <ol style="text-align: left; padding-left: 20px; margin-bottom: 20px;">
-                                <li>Haz clic en el ícono de candado 🔒 en la barra de direcciones</li>
-                                <li>Selecciona "Permisos del sitio"</li>
-                                <li>Cambia "Cámara" a "Permitir"</li>
-                                <li>Actualiza la página</li>
-                            </ol>
-                            <button onclick="location.reload()" style="
-                                background: #2196F3;
-                                color: white;
-                                border: none;
-                                padding: 10px 20px;
-                                border-radius: 5px;
-                                font-size: 16px;
-                                cursor: pointer;
-                            ">
-                                <i class="fas fa-sync-alt"></i> Actualizar página
-                            </button>
-                        </div>
-                    `;
-                    
-                } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
-                    errorMsg = 'No se encontró ninguna cámara.';
-                } else {
-                    errorMsg += error.message;
-                }
-                
-                showMessage(`❌ ${errorMsg}`, 'error', 10000);
-                cameraOverlay.style.display = 'flex';
-            }
-        }
-        
-        // TOMAR FOTO
-        captureBtn.addEventListener('click', () => {
-            if (!stream) return;
-            
-            // Configurar canvas
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            
-            // Espejo para selfie
-            ctx.translate(canvas.width, 0);
-            ctx.scale(-1, 1);
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Convertir a imagen
-            photoData = canvas.toDataURL('image/jpeg', 0.9);
-            preview.src = photoData;
-            previewSection.style.display = 'block';
-            
-            // Cambiar botones
-            captureBtn.style.display = 'none';
-            retakeBtn.style.display = 'flex';
-            uploadBtn.style.display = 'flex';
-            
-            // Detener cámara temporalmente
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-                stream = null;
-            }
-            
-            showMessage('📸 ¡Foto tomada! ¿Lista para subir?', 'info', 3000);
-        });
-        
-        // REINTENTAR
-        retakeBtn.addEventListener('click', () => {
-            previewSection.style.display = 'none';
-            activateBtn.style.display = 'flex';
-            captureBtn.style.display = 'none';
-            retakeBtn.style.display = 'none';
-            uploadBtn.style.display = 'none';
-            photoData = null;
-            cameraOverlay.style.display = 'flex';
-            
-            showMessage('🔄 Listo para otra foto', 'info', 2000);
-        });
-        
-        // ==================== SUBIR A DRIVE ====================
-        
-        uploadBtn.addEventListener('click', async () => {
-            if (!photoData) return;
-            
-            uploadBtn.disabled = true;
-            uploadBtn.innerHTML = '<div class="spinner"></div> SUBIENDO...';
-            
-            showMessage('⏳ Subiendo foto a Google Drive...', 'info', 0);
-            
-            try {
-                // Extraer base64
-                const base64Data = photoData.split(',')[1];
-                const fileName = `Navidad_${Date.now()}_${Math.random().toString(36).substr(2, 6)}.jpg`;
-                
-                console.log('Subiendo:', fileName);
-                
-                // Crear formulario oculto - MÉTODO QUE SÍ FUNCIONA
-                const form = document.createElement('form');
-                form.style.display = 'none';
-                form.method = 'POST';
-                form.action = BACKEND_URL;
-                form.target = '_blank'; // Abrir en nueva pestaña
-                
-                // Campos del formulario
-                const fields = {
-                    'fileName': fileName,
-                    'imageData': base64Data,
-                    'mimeType': 'image/jpeg',
-                    'timestamp': new Date().toISOString(),
-                    'action': 'upload'
-                };
-                
-                Object.entries(fields).forEach(([name, value]) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = name;
-                    input.value = value;
-                    form.appendChild(input);
-                });
-                
-                // Agregar y enviar formulario
-                document.body.appendChild(form);
-                form.submit();
-                
-                // Limpiar después de enviar
-                setTimeout(() => {
-                    document.body.removeChild(form);
-                }, 1000);
-                
-                // Mostrar éxito (asumimos que funcionó)
-                setTimeout(() => {
-                    showMessage('✅ ¡Foto subida exitosamente!', 'success', 5000);
-                    
-                    uploadBtn.disabled = false;
-                    uploadBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> SUBIR A DRIVE';
-                    
-                    // Mostrar enlace directo
-                    directLinkContainer.style.display = 'block';
-                    directLink.href = DRIVE_FOLDER_URL;
-                    
-                    // Actualizar enlace de Drive
-                    driveLink.innerHTML = '<i class="fab fa-google-drive"></i> VER TODAS LAS FOTOS';
-                    
-                    // Cambiar a modo para nueva foto
-                    setTimeout(() => {
-                        previewSection.style.display = 'none';
-                        activateBtn.style.display = 'flex';
-                        retakeBtn.style.display = 'none';
-                        uploadBtn.style.display = 'none';
-                        photoData = null;
-                        cameraOverlay.style.display = 'flex';
-                        cameraOverlay.innerHTML = `
-                            <div>
-                                <i class="fas fa-check-circle" style="font-size: 40px; color: #4CAF50; margin-bottom: 10px;"></i>
-                                <p>¡Foto subida exitosamente!</p>
-                                <p style="font-size: 14px; margin-top: 10px; color: #B0BEC5;">
-                                    Haz clic en "ACTIVAR CÁMARA" para tomar otra foto
-                                </p>
-                            </div>
-                        `;
-                    }, 3000);
-                    
-                }, 2000);
-                
-            } catch (error) {
-                console.error('Error subida:', error);
-                showMessage('❌ Error al subir: ' + error.message, 'error', 5000);
-                
-                uploadBtn.disabled = false;
-                uploadBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> SUBIR A DRIVE';
-            }
-        });
-        
-        // ==================== INICIALIZACIÓN ====================
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Aplicación iniciada');
-            
-            // Configurar enlace de Drive
-            driveLink.href = DRIVE_FOLDER_URL;
-            driveLink.onclick = openDrive;
-            
-            // Configurar botón de activar cámara
-            activateBtn.addEventListener('click', activateCamera);
-            
-            // Verificar si estamos en HTTPS (requerido para cámara)
-            if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-                showMessage('⚠️ Para usar la cámara, abre esta página con HTTPS', 'error', 10000);
-            }
-            
-            // Mostrar mensaje inicial
-            setTimeout(() => {
-                showMessage('👆 Haz clic en "ACTIVAR CÁMARA" para empezar', 'info', 5000);
-            }, 1000);
-        });
-        
-        // Manejar clic en el contenedor de video (ayuda en móvil)
-        videoContainer.addEventListener('click', () => {
-            if (cameraOverlay.style.display !== 'none') {
-                activateCamera();
-            }
-        });
-    </script>
 </body>
 </html>
